@@ -24,7 +24,9 @@ socketio = SocketIO(app)
 
 
 def textImage(strs, sourceimage, color, savepath="./"):
-    im = Image.open(sourceimage)
+    fp = open(sourceimage, "rb")
+    im = Image.open(fp)
+    fp.close()
     out = im.resize((800, 600))
     textout = Image.new("RGB", out.size, "white")
     im.close()
