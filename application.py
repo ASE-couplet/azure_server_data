@@ -28,7 +28,7 @@ def textImage(strs, sourceimage, color, savepath="./"):
     fp = open(sourceimage, "rb")
     im = Image.open(fp)
     out = im.resize((800, 600))
-    textout = Image.new("RGB", out.size, "white")
+    textout = Image.new("RGB", (800, 600), "white")
     draw = ImageDraw.Draw(textout)
     fontSize = 50
     
