@@ -115,4 +115,4 @@ def process_msg(msg):
     # return "url_for('/result/{}'.format(filename))"
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)
