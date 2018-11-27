@@ -24,49 +24,52 @@ socketio = SocketIO(app)
 
 
 def textImage(strs, sourceimage, color, savepath="./"):
-    fp = open(sourceimage, "rb")
-    im = Image.open(fp)
-    fp.close()
-    out = im.resize((800, 600))
-    textout = Image.new("RGB", out.size, "white")
-    im.close()
-    draw = ImageDraw.Draw(textout)
-    fontSize = 50
+    try:
+        fp = open(sourceimage, "rb")
+        im = Image.open(fp)
+        out = im.resize((800, 600))
+        textout = Image.new("RGB", out.size, "white")
+        draw = ImageDraw.Draw(textout)
+        fontSize = 50
     
-    x = 700
-    y = 20
+        x = 700
+        y = 20
     
-    #设置字体，如果没有，也可以不设置
-    font = ImageFont.truetype(os.path.join(os.getcwd(), "Fonts/STXINGKA.TTF"), fontSize)
+        #设置字体，如果没有，也可以不设置
+        font = ImageFont.truetype(os.path.join(os.getcwd(), "Fonts/STXINGKA.TTF"), fontSize)
     
-    right = 0       #往右位移量
-    down = 0        #往下位移量
-    w = 500         #文字宽度（默认值）
-    h = 500         #文字高度（默认值）
-    row_hight = 0   #行高设置（文字行距）
-    word_dir = 0    #文字间距
+        right = 0       #往右位移量
+        down = 0        #往下位移量
+        w = 500         #文字宽度（默认值）
+        h = 500         #文字高度（默认值）
+        row_hight = 0   #行高设置（文字行距）
+        word_dir = 0    #文字间距
 
-    for k,s2 in enumerate(strs):            
-        if k == 0:
-            w,h = font.getsize(s2)   #获取第一个文字的宽和高
-        if s2 == "," or s2 == "\n" :  #换行识别
-            right = right + w + row_hight
-            down = 0
-            continue
-        else :
-            down = down+h + word_dir          
-        # print("序号-值",k,s2)
-        # print("宽-高",w,h)
-        # print("位移",right,down)
-        # print("坐标",x+right, y+down)
-        draw.text((x-right, y+down),s2,(0,0,0),font=font) #设置位置坐标 文字 颜色 字体
+        for k,s2 in enumerate(strs):            
+            if k == 0:
+                w,h = font.getsize(s2)   #获取第一个文字的宽和高
+            if s2 == "," or s2 == "\n" :  #换行识别
+                right = right + w + row_hight
+                down = 0
+                continue
+            else :
+                down = down+h + word_dir          
+            # print("序号-值",k,s2)
+            # print("宽-高",w,h)
+            # print("位移",right,down)
+            # print("坐标",x+right, y+down)
+            draw.text((x-right, y+down),s2,(0,0,0),font=font) #设置位置坐标 文字 颜色 字体
     
-    del draw
-    out = Image.blend(out, textout, 0.2)
-    filename = "out.jpg"
-    new_filename = os.path.join(savepath, filename)
-    out.save(new_filename)
-    return filename
+        del draw
+        out = Image.blend(out, textout, 0.2)
+        filename = "out.jpg"
+        new_filename = os.path.join(savepath, filename)
+        out.save(new_filename)
+    
+    finally:
+        im.close()
+        fp.close()
+        return filename
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -117,4 +120,4 @@ def process_msg(msg):
     # return "url_for('/result/{}'.format(filename))"
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
