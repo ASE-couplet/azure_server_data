@@ -78,7 +78,7 @@ def uploaded_file(filename, randseed):
                                filename)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
