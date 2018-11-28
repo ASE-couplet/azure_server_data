@@ -147,8 +147,10 @@ def main(_):
 
     with Seq2SeqPredictor() as predictor:
         lines = predictor.predict(KEYWORDS)
+        f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "w")
         for line in lines:
-            print(line)
+            f.write(line)
+        f.close()
 
 if __name__ == '__main__':
     tf.app.run()
