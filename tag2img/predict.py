@@ -12,8 +12,7 @@ from vocab import get_vocab, ints_to_sentence
 import os
 import sys
 
-sys.path.append(os.path.realpath(__file__))
-print(sys.path)
+
 
 # Data loading parameters
 tf.app.flags.DEFINE_boolean('rev_data', True, 'Use reversed training data')
