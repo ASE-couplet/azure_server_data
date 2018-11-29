@@ -107,7 +107,7 @@ def result(filename, randseed):
 def process_msg(msg):
     remote_ip = request.remote_addr
     filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    os.system("python /home/site/wwwroot/tag2img/predict.py")
+    # os.system("python /home/site/wwwroot/tag2img/predict.py")
     f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
     strs = f.readlines()
     f.close()
