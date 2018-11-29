@@ -13,6 +13,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(__file__))
+print(sys.path)
 
 # Data loading parameters
 tf.app.flags.DEFINE_boolean('rev_data', True, 'Use reversed training data')
