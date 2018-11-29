@@ -13,6 +13,9 @@ import os
 import sys
 
 
+model_path = os.path.join(sys.path[0], 'model')
+
+
 
 # Data loading parameters
 tf.app.flags.DEFINE_boolean('rev_data', True, 'Use reversed training data')
@@ -52,7 +55,7 @@ def load_config(FLAGS):
         checkpoint_path = tf.train.latest_checkpoint(FLAGS.model_dir + '/')
         print(('Model dir specified, using the latest checkpoint at: {}'.format(checkpoint_path)))
     else:
-        checkpoint_path = tf.train.latest_checkpoint('model/')
+        checkpoint_path = tf.train.latest_checkpoint(model_path)
         print(('Model path not specified, using the latest checkpoint at: {}'.format(checkpoint_path)))
 
     FLAGS.model_path = checkpoint_path
