@@ -106,7 +106,7 @@ def result(filename, randseed):
 @socketio.on('image_url')
 def process_msg(msg):
     remote_ip = request.remote_addr
-    filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+    # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
     emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
@@ -120,13 +120,13 @@ def process_msg(msg):
 @socketio.on('inquiry')
 def inquiry_for_result(msg):
     if os.path.isfile("/home/site/wwwroot/tag2img/sentence/result.txt"):
+        remote_ip = request.remote_addr
         f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
         strs = f.readlines()
         f.close()
-        filename = filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+        filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         # strs = "往后余生,风雪是你,平淡是你,清贫也是你\n荣华是你,心底温柔是你,目光所致,也是你"
         # print(strs)
-        remote_ip = request.remote_addr
         filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
     else:
