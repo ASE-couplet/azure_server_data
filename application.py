@@ -8,6 +8,7 @@ from werkzeug import secure_filename
 import logging
 import random
 import PIL
+import time
 from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
@@ -121,6 +122,7 @@ def process_msg(msg):
 def inquiry_for_result(msg):
     if os.path.isfile("/home/site/wwwroot/tag2img/sentence/result.txt"):
         remote_ip = request.remote_addr
+        time.sleep(1)
         f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
         strs = f.readlines()
         f.close()
