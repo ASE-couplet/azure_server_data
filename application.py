@@ -25,8 +25,8 @@ socketio = SocketIO(app)
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
-    fp = open(sourceimage, "rb")
-    im = Image.open(fp)
+    # fp = open(sourceimage, "rb")
+    im = Image.open(sourceimage)
     out = im.resize((800, 600))
     textout = Image.new("RGB", (800, 600), "white")
     draw = ImageDraw.Draw(textout)
@@ -63,7 +63,7 @@ def textImage(strs, sourceimage, color, savepath="./"):
     new_filename = os.path.join(savepath, filename)
     out.save(new_filename)
     im.close()
-    fp.close()
+    # fp.close()
     return filename
     
     
@@ -109,7 +109,7 @@ def process_msg(msg):
     filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
-    emit('wait', {'data': filename, 'randseed': msg['randseed'], 'status':False})
+    emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
     # return "<html> hello </html>"
     # os.system("python sleep.py")
     # # read result

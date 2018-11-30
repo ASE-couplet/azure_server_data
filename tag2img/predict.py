@@ -152,7 +152,7 @@ def main(_):
         lines = predictor.predict(KEYWORDS)
         f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "w")
         for line in lines:
-            f.write(line)
+            f.writelines(line)
         f.close()
 
 if __name__ == '__main__':
