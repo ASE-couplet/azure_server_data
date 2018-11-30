@@ -25,8 +25,8 @@ socketio = SocketIO(app)
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
-    # fp = open(sourceimage, "rb")
-    im = Image.open(sourceimage)
+    fp = open(sourceimage, "rb")
+    im = Image.open(fp)
     out = im.resize((800, 600))
     textout = Image.new("RGB", (800, 600), "white")
     draw = ImageDraw.Draw(textout)
@@ -63,7 +63,7 @@ def textImage(strs, sourceimage, color, savepath="./"):
     new_filename = os.path.join(savepath, filename)
     out.save(new_filename)
     im.close()
-    # fp.close()
+    fp.close()
     return filename
     
     
@@ -123,7 +123,7 @@ def inquiry_for_result(msg):
         f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
         strs = f.readlines()
         f.close()
-        filename = msg['data']
+        filename = filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         # strs = "往后余生,风雪是你,平淡是你,清贫也是你\n荣华是你,心底温柔是你,目光所致,也是你"
         # print(strs)
         remote_ip = request.remote_addr
