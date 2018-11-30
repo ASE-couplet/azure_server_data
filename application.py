@@ -107,8 +107,8 @@ def result(filename, randseed):
 def process_msg(msg):
     remote_ip = request.remote_addr
     filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    # os.system("python ./tag2img/predict.py")
-    os.system("start python sleep.py")
+    os.system("start python tag2img/predict.py")
+    # os.system("start python sleep.py")
     emit('wait', {'data': filename, 'randseed': msg['randseed'], 'status':False})
     # return "<html> hello </html>"
     # os.system("python sleep.py")
@@ -117,7 +117,7 @@ def process_msg(msg):
     # 
     # return "url_for('/result/{}'.format(filename))"
 
-@socketio.on('inquiry'):
+@socketio.on('inquiry')
 def inquiry_for_result(msg):
     if os.path.isfile("/home/site/wwwroot/tag2img/sentence/result.txt"):
         f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
