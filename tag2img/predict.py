@@ -150,7 +150,7 @@ def main(_):
 
     with Seq2SeqPredictor() as predictor:
         lines = predictor.predict(KEYWORDS)
-        f = file("/home/site/wwwroot/tag2img/sentence/result.txt", "w")
+        f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "w")
         for line in lines:
             f.write(line + '\n')
         f.close()
