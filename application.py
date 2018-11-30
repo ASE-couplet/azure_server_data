@@ -126,6 +126,7 @@ def inquiry_for_result(msg):
         filename = msg['data']
         # strs = "往后余生,风雪是你,平淡是你,清贫也是你\n荣华是你,心底温柔是你,目光所致,也是你"
         # print(strs)
+        remote_ip = request.remote_addr
         filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
     else:
