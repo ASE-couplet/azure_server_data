@@ -39,7 +39,7 @@
         });
 
 		socket.on('wait', function(msg) {
-			socket.emit('inquiry', {'data': msg['filename'], 'randseed': msg['randseed']});
+			socket.emit('inquiry', {'data': msg.data, 'randseed': msg.randseed});
 		});
 
         // $('form#emit').submit(function(event) {
