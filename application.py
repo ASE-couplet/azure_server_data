@@ -125,12 +125,10 @@ def inquiry_for_result(msg):
         strs = f.readlines()
         f.close()
         filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-        # strs = "往后余生,风雪是你,平淡是你,清贫也是你\n荣华是你,心底温柔是你,目光所致,也是你"
-        # print(strs)
         filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
     else:
-        emit('wait', {'data': msg['filename'], 'randseed': msg['randseed'], 'status':False})
+        emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
 if __name__ == '__main__':
     socketio.run(app)
