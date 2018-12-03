@@ -6,13 +6,14 @@ import os
 VOCAB_SIZE = 6000
 SEP_TOKEN = 0
 PAD_TOKEN = 5999
+import sys
+root = sys.path[0]
 
-
-DATA_RAW_DIR = 'data/raw'
-DATA_PROCESSED_DIR = 'data/processed'
-DATA_SAMPLES_DIR = 'data/samples'
-MODEL_DIR = 'model'
-LOG_DIR = 'log'
+DATA_RAW_DIR = os.path.join(root, 'data/raw')
+DATA_PROCESSED_DIR = os.path.join(root, 'data/processed')
+DATA_SAMPLES_DIR = os.path.join(root, 'data/samples')
+MODEL_DIR = os.path.join(root, 'model')
+LOG_DIR = os.path.join(root, 'log')
 
 
 if not os.path.exists(DATA_PROCESSED_DIR):

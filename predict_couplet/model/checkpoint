@@ -1,6 +1,2 @@
-model_checkpoint_path: "translate.ckpt-3330700"
-all_model_checkpoint_paths: "translate.ckpt-3330300"
-all_model_checkpoint_paths: "translate.ckpt-3330400"
-all_model_checkpoint_paths: "translate.ckpt-3330500"
-all_model_checkpoint_paths: "translate.ckpt-3330600"
-all_model_checkpoint_paths: "translate.ckpt-3330700"
+model_checkpoint_path: "translate.ckpt-771600
+all_model_checkpoint_paths: "translate.ckpt-771600"
