@@ -9,11 +9,11 @@ PAD_TOKEN = 5999
 import sys
 root = sys.path[0]
 
-DATA_RAW_DIR = os.path.join(root, 'data/raw')
-DATA_PROCESSED_DIR = os.path.join(root, 'data/processed')
-DATA_SAMPLES_DIR = os.path.join(root, 'data/samples')
-MODEL_DIR = os.path.join(root, 'model')
-LOG_DIR = os.path.join(root, 'log')
+DATA_RAW_DIR = os.path.join(root, 'predict_couplet/data/raw')
+DATA_PROCESSED_DIR = os.path.join(root, 'predict_couplet/data/processed')
+DATA_SAMPLES_DIR = os.path.join(root, 'predict_couplet/data/samples')
+MODEL_DIR = os.path.join(root, 'predict_couplet/model')
+LOG_DIR = os.path.join(root, 'predict_couplet/log')
 
 
 if not os.path.exists(DATA_PROCESSED_DIR):
