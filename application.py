@@ -12,6 +12,7 @@ import time
 from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
+from img2tag import img2tag
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -106,6 +107,7 @@ def result(filename, randseed):
 @app.route('/reflect')
 def reflect():
     return render_template("reflect.html")
+
 
 
 @socketio.on('image_url')
