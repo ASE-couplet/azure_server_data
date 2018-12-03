@@ -14,7 +14,8 @@ from PIL import Image
 from PIL import ImageDraw
 from img2tag import img2tag
 import sys
-sys.path.append(os.path.join(sys.path[0], "tag2img"))
+sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
+
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -24,7 +25,8 @@ app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-
+from web_test import Main_Poetry_maker
+maker = Main_Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
@@ -115,9 +117,16 @@ def reflect():
 def process_msg(msg):
     remote_ip = request.remote_addr
     # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    os.system("python tag2img/predict.py &")
+    # os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
-    emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
+    file_url = url_for('uploaded_file', msg['data'], randseed=msg['randseed'])
+    keywords = img2tag(file_url)
+    keywords= ' '.join(keywords)
+    strs = maker.predict(keywords)
+    filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+    filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
+    emit('response', {'data': filename, 'randseed': msg['randseed']})
+    # emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
     # return "<html> hello </html>"
     # os.system("python sleep.py")
     # # read result
