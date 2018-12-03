@@ -13,7 +13,8 @@ from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
 from img2tag import img2tag
-
+import sys
+sys.path.append(os.path.join(sys.path[0], "tag2img"))
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
