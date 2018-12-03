@@ -119,7 +119,7 @@ def process_msg(msg):
     # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     # os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
-    file_url = url_for('uploaded_file', msg['data'], randseed=msg['randseed'])
+    file_url = url_for('uploaded_file', filename=msg['data'], randseed=msg['randseed'])
     keywords = img2tag(file_url)
     keywords= ' '.join(keywords)
     strs = maker.predict(keywords)
