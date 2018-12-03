@@ -1,11 +1,15 @@
 import argparse
 import sys
+import os
+import sys
+sys.path.append("/home/site/wwwroot/predict_couplet")
 import random
 from plan import Planner
 from predict import Seq2SeqPredictor
 from match import MatchUtil
 
 import tensorflow as tf
+
 
 class Main_Poetry_maker:
     def __init__(self):
