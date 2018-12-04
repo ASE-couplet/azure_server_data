@@ -122,7 +122,7 @@ def process_msg(msg):
     file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
     savepath = "/home/site/wwwroot/result.txt"
     # keywords = img2tag(file_url)
-    os.system("python get_tag.py &")
+    os.system("python get_tag.py -f {} -p {} &".format(file_url, savepath))
     emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
 @socketio.on('inquiry')
