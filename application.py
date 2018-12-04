@@ -119,31 +119,20 @@ def process_msg(msg):
     # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     # os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
-    # file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
+    file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
+    savepath = "/home/site/wwwroot/result.txt"
     # keywords = img2tag(file_url)
-    keywords = "风华 雪月"
-    # keywords= ' '.join(keywords)    
-    strs = maker.predict(keywords)
-    filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
-    # filename = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
-    emit('response', {'data': filename, 'randseed': msg['randseed']})
-    # emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
-    # return "<html> hello </html>"
-    # os.system("python sleep.py")
-    # # read result
-    # 
-    # 
-    # return "url_for('/result/{}'.format(filename))"
+    os.system("python get_tag.py &")
+    emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
 @socketio.on('inquiry')
 def inquiry_for_result(msg):
-    if os.path.isfile("/home/site/wwwroot/tag2img/sentence/result.txt"):
+    if os.path.isfile("/home/site/wwwroot/result.txt"):
         remote_ip = request.remote_addr
-        time.sleep(1)
-        f = open("/home/site/wwwroot/tag2img/sentence/result.txt", "r")
-        strs = f.readlines()
+        f = open("/home/site/wwwroot/result.txt", "r")
+        keywords = f.readlines()
         f.close()
+        strs = maker.predict(keywords)
         filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
