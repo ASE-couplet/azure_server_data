@@ -123,9 +123,10 @@ def process_msg(msg):
     keywords = img2tag(file_url)
     # keywords = "风华 雪月"
     keywords= ' '.join(keywords)    
-    strs = maker.predict(keywords)
-    filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
+    # strs = maker.predict(keywords)
+    # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+    # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
+    filename = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
     emit('response', {'data': filename, 'randseed': msg['randseed']})
     # emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
     # return "<html> hello </html>"
