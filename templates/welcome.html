@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PoemSpace</title>
+    <style>
+        @font-face{
+            font-family:"logo_zh", "logo_en", "text";
+            src:url('/Fonts/logo_zh.ttf') format('truetype'),
+                url('/Fonts/logo_en.TTF') format('truetype'),
+                url('/Fonts/text.TTF') format('truetype');
+        }
+        div{
+            text-align: center;
+            width: 100%;
+        }
+        .upload{
+            position: relative;width: 80px;height: 30px;line-height: 18px;background:white;text-align: justify;
+            color:black;padding: 0px 5px;-webkit-border-radius: 20px;border-radius: 10px;
+            margin:  auto;
+        }
+        .upload form{width:100%;position:absolute; left:0; top:0;opacity:0; filter:alpha(opacity=0);}
+        .upload form input{width: 100%;}
+        .content{font-family: 'logo_zh'}
+    </style>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/text.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        function fsubmit(obj){
+        document.getElementById("form1").submit();
+        }
+    </script>
+</head>
+
+<body style="background-color:whitesmoke">
+    <div>
+        <img src="/static/images/upper.jpg">
+        <br/>
+        <font size="8" color="gray" face='logo_zh'>诗景|PoemSpace</font>
+        <br/>
+        <br/>
+        <font size="5" color="gray">
+            床前明月光，<br/>
+            疑似地上霜。<br/>
+            举头望明月，<br/>
+            低头思故乡。<br/>
+        </font>
+        <br/>     
+    </div>
+    <div class="upload">
+        <p>上传图片</p>
+        <form method="post" id="form1" enctype="multipart/form-data">
+            <input type="file" accept="image/*" name="file" onchange="javascript:fsubmit(document.form1);"/>
+        </form>
+    </div>
+    <div>
+        <br/>
+        <font size="3" color="gray">关于我们 | 反馈</font>
+    </div>
+
+</body>
+</html>

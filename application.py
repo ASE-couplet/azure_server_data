@@ -25,8 +25,8 @@ app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-from web_test import Main_Poetry_maker
-maker = Main_Poetry_maker()
+# from web_test import Main_Poetry_maker
+# maker = Main_Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
@@ -99,7 +99,7 @@ def upload_file():
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
-    return render_template("index.html")
+    return render_template("welcome.html")
 
 @app.route('/result/<filename>/<randseed>')
 def result(filename, randseed):
@@ -111,7 +111,9 @@ def result(filename, randseed):
 def reflect():
     return render_template("reflect.html")
 
-
+@app.route('/test')
+def test():
+    return render_template("welcome.html")
 
 @socketio.on('image_url')
 def process_msg(msg):
