@@ -130,7 +130,7 @@ def inquiry_for_result(msg):
     if os.path.isfile("/home/site/wwwroot/result.txt"):
         remote_ip = request.remote_addr
         f = open("/home/site/wwwroot/result.txt", "r")
-        keywords = f.readlines()
+        keywords = f.readline()
         f.close()
         strs = maker.predict(keywords)
         filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
