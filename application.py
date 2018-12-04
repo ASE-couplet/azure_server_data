@@ -25,8 +25,8 @@ app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-# from web_test import Main_Poetry_maker
-# maker = Main_Poetry_maker()
+from web_test import Main_Poetry_maker
+maker = Main_Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
@@ -119,15 +119,14 @@ def process_msg(msg):
     # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     # os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
-    file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
-    keywords = img2tag(file_url)
-    # # keywords = "风华 雪月"
-    keywords= ' '.join(keywords)    
-    # strs = maker.predict(keywords)
-    # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-    # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
+    # file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
+    # keywords = img2tag(file_url)
+    keywords = "风华 雪月"
+    # keywords= ' '.join(keywords)    
+    strs = maker.predict(keywords)
+    filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+    filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
     # filename = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
-    filename = "test"
     emit('response', {'data': filename, 'randseed': msg['randseed']})
     # emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
     # return "<html> hello </html>"
