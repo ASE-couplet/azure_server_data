@@ -1,14 +1,102 @@
 <!DOCTYPE html>
-{% extends "bootstrap/base.html" %}
-{% block title %}图诗{% endblock %}
+<html>
 
-{% block content %}
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column" align=center>
-            <img src={{file_url}} />
-            <p>{{sentence}}</p>
-		</div>
-	</div>
-</div>
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PoemSpace</title>
+    <style>
+        @font-face{
+            font-family:"logo_zh", "logo_en", "text";
+            src:url('./Fonts/logo_zh.ttf') format('truetype'),
+                url('./Fonts/logo_en.TTF') format('truetype'),
+                url('./Fonts/text.TTF') format('truetype');
+        }
+        div{
+            text-align: center;
+            width: 100%;
+        }
+        .upload{
+            position: relative;width: 80px;height: 30px;line-height: 18px;background:white;text-align: justify;
+            color:black;padding: 0px 5px;-webkit-border-radius: 20px;border-radius: 10px;
+            margin:  auto;
+        }
+        .upload form{width:100%;position:absolute; left:0; top:0;opacity:0; filter:alpha(opacity=0);}
+        .upload form input{width: 100%;}
+        .content{font-family: 'logo_zh'}
+    </style>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/text.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        function fsubmit(obj){
+        document.getElementById("form1").submit();
+        }
+    </script>
+</head>
+
+<script type="text/javascript">
+    function set_duilian_visible(){
+        document.getElementById("jueju").style.display="none";
+        document.getElementById("duilian").style.display="";
+        document.getElementById("jueju_button").style.background="white";
+        document.getElementById("duilian_button").style.background="#CCCCCC";
+    }
+    function set_jueju_visible(){
+        document.getElementById("duilian").style.display="none";
+        document.getElementById("jueju").style.display="";
+        document.getElementById("duilian_button").style.background="white";
+        document.getElementById("jueju_button").style.background="#CCCCCC";
+    }
+</script>
+
+
+
+<body style="background-color:whitesmoke">
+    <div>
+        <font size="4" color="gray" face="logo_zh">诗景|</font>
+        <font size="4" color="grey" face="logo_en">PoemScape</font>    
+    </div>
+    <div>
+        <img src="/static/images/jueju_not_chosen.jpg" width="200" onclick="set_jueju_visible()">
+        <img src="/static/images/duilian_chosen.jpg" width="200" onclick="set_duilian_visible()">
+ 
+    </div>
+    <div id="jueju" style="display:;">
+        <font size="3" color="gray" style="writing-mode : tb-rl ;" height="200" width="200">
+            往后余生，<br/>
+            风雪是你，<br/>
+            平淡是你，<br/>
+            清贫也是你。<br/>
+        </font>
+        <img src="/static/image/QRcode.png" height="200" width="200">
+        <br/>
+        <img src="/static/image/yusheng2.jpg" width="400">   
+    </div>
+    </div>
+    <div id="duilian" style="display:none ;">
+        <font size="3" color="gray" style="writing-mode : tb-rl ;" height="200" width="200">
+            荣华是你，<br/>
+            心底温柔是你，<br/>
+            目光所至，<br/>
+            也是你。<br/>
+        </font>
+        <img src="/static/image/QRcode.png" height="200" width="200">
+        <br/>
+        <img src="/static/image/yusheng2.jpg" width="400">   
+    </div>
+    <div>
+        <img src="/static/images/zaixieyishou.jpg" width="133" onclick="set_jueju_visible()">
+        <img src="/static/images/shengchengtupian.jpg" width="134" onclick="set_jueju_visible()">
+        <img src="/static/images/fuzhiwenzi.jpg" width="133" onclick="set_duilian_visible()">
+
+    </div>
+    <div>
+        <br/>
+        <font size="3" color="gray">关于我们 | 反馈</font>
+    </div>
+
+</body>
+</html>

@@ -113,7 +113,7 @@ def reflect():
 
 @app.route('/test')
 def test():
-    return render_template("test.html")
+    return render_template("result.html")
 
 @socketio.on('image_url')
 def process_msg(msg):
