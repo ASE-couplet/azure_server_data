@@ -122,7 +122,7 @@ def process_msg(msg):
     file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
     keywords = img2tag(file_url)
     # keywords = "风华 雪月"
-    keywords= '\n'.join(keywords)
+    keywords= ' '.join(keywords)    
     strs = maker.predict(keywords)
     filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
     filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
