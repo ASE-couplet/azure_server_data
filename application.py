@@ -120,16 +120,17 @@ def process_msg(msg):
     # os.system("python tag2img/predict.py &")
     # os.system("start python sleep.py")
     file_url = "https://poempicture.azurewebsites.net/uploads/" + msg["data"] + "/" + msg["randseed"]
-    savepath = "/home/site/wwwroot/result.txt"
+    savepath = "/home/site/wwwroot/uploader/" + remote_ip + msg["randseed"] + "/" + "result.txt"
     # keywords = img2tag(file_url)
     os.system("python get_tag.py -f {} -p {} &".format(file_url, savepath))
     emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
 @socketio.on('inquiry')
 def inquiry_for_result(msg):
-    if os.path.isfile("/home/site/wwwroot/result.txt"):
-        remote_ip = request.remote_addr
-        f = open("/home/site/wwwroot/result.txt", "r")
+    remote_ip = request.remote_addr
+    result_path = "/home/site/wwwroot/uploader/" + remote_ip + msg["randseed"] + "/" + "result.txt"
+    if os.path.isfile(result_path):
+        f = open(result_path, "r")
         keywords = f.readline()
         f.close()
         strs = maker.predict(keywords)
