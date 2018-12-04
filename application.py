@@ -25,8 +25,8 @@ app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-from web_test import Main_Poetry_maker
-maker = Main_Poetry_maker()
+# from web_test import Main_Poetry_maker
+# maker = Main_Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
