@@ -33,7 +33,7 @@ class Main_Poetry_maker:
         #             line=lines[line_number],
         #             punctuation=punctuation
         #     ))
-        return ' '.join(lines)
+        return ','.join(lines)
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
