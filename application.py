@@ -115,7 +115,6 @@ def upload_file():
 @app.route('/result/<filename>/<randseed>/<strs>')
 def result(filename, randseed, strs):
     file_url = url_for('uploaded_file', filename=filename, randseed=randseed)
-    sentence = "啊啊啊啊啊啊啊\n啦啦啦啦啦啦啦\n"
     return render_template("result.html", file_url=file_url, sentence=strs)
 
 @app.route('/reflect')
