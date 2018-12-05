@@ -7,6 +7,8 @@ VOCAB_SIZE = 6000
 SEP_TOKEN = 0
 PAD_TOKEN = 5999
 
+import sys
+sys.path.append("home/site/wwwroot/predict_poetry")
 
 DATA_RAW_DIR = 'data/raw'
 DATA_PROCESSED_DIR = 'data/processed'
