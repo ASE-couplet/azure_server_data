@@ -18,7 +18,7 @@ class Main_Poetry_maker:
     def predict(self, input_ustr):
         input_ustr = input_ustr.strip()
         keywords = self.planner.plan(input_ustr)
-        return str(keywords)
+        # return str(keywords)
         lines = self.predictor.predict(keywords)
         result = self.Judge.eval_rhyme(lines)
         while(result == False):
@@ -32,7 +32,7 @@ class Main_Poetry_maker:
         #             line=lines[line_number],
         #             punctuation=punctuation
         #     ))
-        return ','.join(lines)
+        return '\n'.join(lines)
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()

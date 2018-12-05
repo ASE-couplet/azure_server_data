@@ -14,7 +14,7 @@ from PIL import Image
 from PIL import ImageDraw
 from img2tag import img2tag
 import sys
-sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
+# sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
 sys.path.append(os.path.join(sys.path[0], "predict_poetry"))
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -112,8 +112,18 @@ def upload_file():
             return render_template("uploader.html", filename=filename, randseed=randseed)
     return render_template("welcome.html")
 
-@app.route('/result/<filename>/<randseed>/<strs>')
+@app.route('/result/<filename>/<randseed>/<strs>', methods=['GET', 'POST'])
 def result(filename, randseed, strs):
+    if request.method == "POST":
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            remote_ip = request.remote_addr
+            randseed = str(random.randint(100, 10000))
+            remote_ip = remote_ip + randseed
+            os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
+            return render_template("uploader.html", filename=filename, randseed=randseed)
     file_url = url_for('uploaded_file', filename=filename, randseed=randseed)
     return render_template("result.html", file_url=file_url, sentence=strs)
 
