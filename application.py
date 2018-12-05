@@ -77,7 +77,17 @@ def textImage(strs, sourceimage, color, savepath="./"):
     
     
     
-        
+def img_compress(file_path):
+    img = Image.open(file_path)
+    w, h = img.size
+    new_w = 400
+    new_h =  int(h * 400 / w)
+    new_img = img.resize((new_w, new_h))
+    name, ext = os.path.splitext(file_path)
+    new_file_path = name + '_compressed' + ext
+    new_img.save(new_file_path)
+    return ps.path.basename(new_file_path)
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -109,6 +119,7 @@ def upload_file():
             remote_ip = remote_ip + randseed
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
+            filename=img_compress(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
     return render_template("welcome.html")
 

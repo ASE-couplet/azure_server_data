@@ -8,8 +8,8 @@ SEP_TOKEN = 0
 PAD_TOKEN = 5999
 
 import sys
-root = sys.path.append("home/site/wwwroot/predict_poetry")
-
+sys.path.append("/home/site/wwwroot/predict_poetry")
+root = "/home/site/wwwroot/predict_poetry"
 DATA_RAW_DIR = os.path.join(root, 'data/raw')
 DATA_PROCESSED_DIR = os.path.join(root, 'data/processed')
 DATA_SAMPLES_DIR = os.path.join(root, 'data/samples')

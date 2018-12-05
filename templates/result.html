@@ -38,6 +38,9 @@
 </head>
 
 <script type="text/javascript">
+    function upload_file(){
+        document.getElementById('dianwo').click();
+    }
     function set_duilian_visible(){
         document.getElementById("jueju").style.display="none";
         document.getElementById("duilian").style.display="";
@@ -109,7 +112,9 @@
 	<td width="400">
 		<table>
 	<td width="133">
-        <img src="/static/images/zaixieyishou.jpg" width="133">
+        <form method="post" id="form1" enctype="multipart/form-data">
+        <img src="/static/images/zaixieyishou.jpg" width="133" onclick="upload_file()">
+        </form>
         </td>
         <td width="134">
         <img src="/static/images/shengchengtupian.jpg" width="134" onclick="set_jueju_visible()">
@@ -125,6 +130,11 @@
     <div>
         <br/>
         <font size="3" color="gray"><a href="/AboutUs" >关于我们</a> | <a href="/FeedBack">反馈</a></font>
+        <div class="uplpad" style="display:none ;">
+        <form method="post" id="form1" enctype="multipart/form-data">
+            <input id='dianwo' type="file" accept="image/*" name="file" onchange="javascript:fsubmit(document.form1);"/>
+        </form>
+        </div>
     </div>
 
 </body>
