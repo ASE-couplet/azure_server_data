@@ -139,7 +139,7 @@ def inquiry_for_result(msg):
         f = open(result_path, "r")
         keywords = f.readline()
         f.close()
-        strs = maker.predict(keywords)
+        strs = Poetry.predict(keywords)
         filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
