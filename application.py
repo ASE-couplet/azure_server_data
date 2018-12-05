@@ -77,7 +77,7 @@ def textImage(strs, sourceimage, color, savepath="./"):
     
     
     
-def img_compress(file_path):
+def img_compress(file_path):
     img = Image.open(file_path)
     w, h = img.size
     new_w = 400
