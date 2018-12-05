@@ -22,6 +22,13 @@
             text-align: center;
             width: 100%;
         }
+        a{
+            text-decoration:none;
+        }
+        a:link {color:gray}
+        a:hover {color:darkslategray}
+        a:visited {color: blue}
+        a:active {color: gray}
         .upload{
             position: relative;width: 80px;height: 30px;line-height: 18px;background:white;text-align: justify;
             color:black;padding: 0px 5px;-webkit-border-radius: 20px;border-radius: 10px;
@@ -52,24 +59,23 @@
         <br/>
         <font size="8" color="gray" face='text'>詩景|<font size="8" color="gray" face='logo_en'>PoemSpace</font>
         <br/>
-        <br/>
-        <font size="5" color="gray">
-            床前明月光，<br/>
-            疑似地上霜。<br/>
-            举头望明月，<br/>
-            低头思故乡。<br/>
+        <font size="5" color="gray" face='text'>
+            请告诉我们你的建议：
         </font>
         <br/>     
     </div>
-    <div class="upload">
-        <font size="3">上传图片</font>
-        <form method="post" id="form1" enctype="multipart/form-data">
-            <input type="file" accept="image/*" name="file" onchange="javascript:fsubmit(document.form1);"/>
-        </form>
+
+    <div>
+        <input type="text" style="width: 30%; height: 200px"/>
+        <br/>
+        <input type="submit" value="提交" style="font-size:20px"/>
     </div>
     <div>
-        <br/>
-        <font size="3" color="gray" face='logo_zh'><a href="AboutUS.html">关于我们</a> | <a href="FeedBack.html">反馈</a></font>
+        <font size="3" face='text'>
+            <a href="/AboutUS.html">关于我们</a>
+            |
+            <a href="/welcome.html">返回</a>
+        </font>
     </div>
 
 </body>

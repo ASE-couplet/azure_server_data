@@ -18,6 +18,13 @@
             font-family: "text";
             src:url('/static/fonts/text.TTF') format('truetype')
         }
+        a{
+            text-decoration:none;
+        }
+            a:link {color:gray}
+            a:hover {color:darkslategray}
+            a:visited {color: blue}
+            a:active {color: gray}
         div{
             text-align: center;
             width: 100%;
@@ -53,23 +60,19 @@
         <font size="8" color="gray" face='text'>詩景|<font size="8" color="gray" face='logo_en'>PoemSpace</font>
         <br/>
         <br/>
-        <font size="5" color="gray">
-            床前明月光，<br/>
-            疑似地上霜。<br/>
-            举头望明月，<br/>
-            低头思故乡。<br/>
+        <font size="5" color="gray" face='text'>
+            用诗/对联来描述你的图片 <br/>
+            除了免责声明我不知道再说些啥
         </font>
         <br/>     
     </div>
-    <div class="upload">
-        <font size="3">上传图片</font>
-        <form method="post" id="form1" enctype="multipart/form-data">
-            <input type="file" accept="image/*" name="file" onchange="javascript:fsubmit(document.form1);"/>
-        </form>
-    </div>
     <div>
         <br/>
-        <font size="3" color="gray" face='logo_zh'><a href="AboutUS.html">关于我们</a> | <a href="FeedBack.html">反馈</a></font>
+        <font size="3" face='text'>
+            <a href="/welcome.html">返回</a>
+            |
+            <a href="/FeedBack.html">反馈</a>
+        </font>
     </div>
 
 </body>
