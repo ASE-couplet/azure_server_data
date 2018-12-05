@@ -83,6 +83,13 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+@app.route("/AboutUs")
+def AboutUs():
+    return render_template("AboutUs.html")
+
+@app.route("/FeedBack")
+def FeedBack():
+    return render_template("FeedBack.html")
     
 @app.route('/uploads/<filename>/<randseed>')
 def uploaded_file(filename, randseed):
