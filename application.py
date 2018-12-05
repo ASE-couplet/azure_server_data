@@ -15,6 +15,7 @@ from PIL import ImageDraw
 from img2tag import img2tag
 import sys
 sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
+sys.path.append(os.path.join(sys.path[0], "predict_poetry"))
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -27,6 +28,9 @@ socketio = SocketIO(app)
 
 # from web_test import Main_Poetry_maker
 # maker = Main_Poetry_maker()
+
+from web_test_poem import Main_Poetry_maker as Poetry_maker
+Poetry = Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
