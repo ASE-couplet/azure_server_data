@@ -25,7 +25,7 @@
         });
 
         socket.on('response', function(msg) {
-            window.location.href = 'result/' + msg.data + '/' + msg.randseed;
+            window.location.href = 'result/' + msg.data + '/' + msg.randseed + '/' + msg.strs;
         });
 
 		socket.on('wait', function(msg) {

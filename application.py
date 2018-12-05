@@ -112,11 +112,11 @@ def upload_file():
             return render_template("uploader.html", filename=filename, randseed=randseed)
     return render_template("welcome.html")
 
-@app.route('/result/<filename>/<randseed>')
-def result(filename, randseed):
+@app.route('/result/<filename>/<randseed>/<strs>')
+def result(filename, randseed, strs):
     file_url = url_for('uploaded_file', filename=filename, randseed=randseed)
-    sentence = "show_result"
-    return render_template("result.html", file_url=file_url, sentence=sentence)
+    sentence = "啊啊啊啊啊啊啊\n啦啦啦啦啦啦啦\n"
+    return render_template("result.html", file_url=file_url, sentence=strs)
 
 @app.route('/reflect')
 def reflect():
@@ -147,9 +147,9 @@ def inquiry_for_result(msg):
         keywords = f.readline()
         f.close()
         strs = Poetry.predict(keywords)
-        filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
+        # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
-        emit('response', {'data': filename, 'randseed': msg['randseed']})
+        emit('response', {'data': msg['data'], 'randseed': msg['randseed'], 'strs':strs})
     else:
         emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
