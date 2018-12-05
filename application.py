@@ -29,8 +29,8 @@ socketio = SocketIO(app)
 # from web_test import Main_Poetry_maker
 # maker = Main_Poetry_maker()
 
-from web_test_poem import Main_Poetry_maker as Poetry_maker
-Poetry = Poetry_maker()
+# from web_test_poem import Main_Poetry_maker as Poetry_maker
+# Poetry = Poetry_maker()
 
 def textImage(strs, sourceimage, color, savepath="./"):
     
@@ -45,7 +45,7 @@ def textImage(strs, sourceimage, color, savepath="./"):
     y = 20
     
     #设置字体，如果没有，也可以不设置
-    font = ImageFont.truetype(os.path.join(os.getcwd(), "Fonts/STXINGKA.TTF"), fontSize)
+    font = ImageFont.truetype(os.path.join(os.getcwd(), "/static/fonts/STXINGKA.TTF"), fontSize)
     
     right = 0       #往右位移量
     down = 0        #往下位移量
@@ -148,7 +148,7 @@ def inquiry_for_result(msg):
         f.close()
         strs = Poetry.predict(keywords)
         filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
-        filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
+        # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': filename, 'randseed': msg['randseed']})
     else:
         emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
