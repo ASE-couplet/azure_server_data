@@ -26,8 +26,8 @@ app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-# from web_test import Main_Poetry_maker
-# maker = Main_Poetry_maker()
+from web_test import Main_Poetry_maker
+maker = Main_Poetry_maker()
 
 from web_test_poem import Main_Poetry_maker as Poetry_maker
 Poetry = Poetry_maker()

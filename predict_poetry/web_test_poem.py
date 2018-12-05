@@ -24,13 +24,14 @@ class Main_Poetry_maker:
             lines = self.predictor.predict(keywords)
             result = self.Judge.eval_rhyme(lines)
 
-        for line_number in range(4):
-            punctuation = u'，' if line_number % 4 == 0 else u'。'
-            print(u'{keyword}\t\t{line}{punctuation}'.format(
-                    keyword=keywords[line_number],
-                    line=lines[line_number],
-                    punctuation=punctuation
-            ))
+        # for line_number in range(4):
+        #     punctuation = u'，' if line_number % 4 == 0 else u'。'
+        #     print(u'{keyword}\t\t{line}{punctuation}'.format(
+        #             keyword=keywords[line_number],
+        #             line=lines[line_number],
+        #             punctuation=punctuation
+        #     ))
+        return ','.join(lines)
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
