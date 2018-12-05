@@ -125,6 +125,7 @@ def upload_file():
 
 @app.route('/result/<filename>/<randseed>/<strs>', methods=['GET', 'POST'])
 def result(filename, randseed, strs):
+    remote_ip = request.remote_addr
     if request.method == "POST":
         file = request.files['file']
         if file and allowed_file(file.filename):
@@ -135,7 +136,7 @@ def result(filename, randseed, strs):
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
-    file_url = url_for('uploaded_file', filename=filename, randseed=randseed)
+    file_url = "/home/site/wwwroot/uploader/" + remote_ip + randseed + "/" + filename
     return render_template("result.html", file_url=file_url, sentence=strs)
 
 @app.route('/reflect')
