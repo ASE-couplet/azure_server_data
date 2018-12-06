@@ -137,10 +137,10 @@ def result(filename, randseed):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
     
-    with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/result.txt", "r") as f:
+    with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/strs.txt", "r") as f:
         strs = f.readlines()
     strs = "\n".join(strs)
-    file_url = "/home/site/wwwroot/uploader/" + remote_ip + randseed + "/" + filename
+    file_url = "https://poempicture.azurewebsites.net/uploads/" + filename + "/" + randseed
 
     return render_template("result.html", file_url=file_url, sentence=strs)
 
@@ -173,7 +173,7 @@ def inquiry_for_result(msg):
         keywords = f.readline()
         f.close()
         strs = Poetry.predict(keywords)
-        f = open(result_path, "w")
+        f = open("/home/site/wwwroot/uploader/" + remote_ip + msg["randseed"] + "/strs.txt", "w")
         f.writelines(strs)
         f.close()
         # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
