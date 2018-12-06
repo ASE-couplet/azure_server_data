@@ -12,6 +12,8 @@ import sys
 from flask import redirect
 # sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
 sys.path.append(os.path.join(sys.path[0], "predict_poetry"))
+import PIL
+from PIL import Image
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
