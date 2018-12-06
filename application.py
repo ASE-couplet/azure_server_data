@@ -123,7 +123,7 @@ def upload_file():
             return render_template("uploader.html", filename=filename, randseed=randseed)
     return render_template("welcome.html")
 
-@app.route('/result/<filename>/<randseed>/<strs>', methods=['GET', 'POST'])
+@app.route('/result/<filename>/<randseed>', methods=['GET', 'POST'])
 def result(filename, randseed, strs):
     remote_ip = request.remote_addr
     if request.method == "POST":
@@ -136,6 +136,10 @@ def result(filename, randseed, strs):
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
+    with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/result.txt") as f:
+        strs = f.readlines()
+    
+    strs = "\n".join(strs)
     file_url = "/home/site/wwwroot/uploader/" + remote_ip + randseed + "/" + filename
     return render_template("result.html", file_url=file_url, sentence=strs)
 
@@ -168,9 +172,12 @@ def inquiry_for_result(msg):
         keywords = f.readline()
         f.close()
         strs = Poetry.predict(keywords)
+        f = open(result_path, "w")
+        f.writelines(strs)
+        f.close()
         # filename = os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed'], msg['data'])
         # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
-        emit('response', {'data': msg['data'], 'randseed': msg['randseed'], 'strs':strs})
+        emit('response', {'data': msg['data'], 'randseed': msg['randseed']})
     else:
         emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
