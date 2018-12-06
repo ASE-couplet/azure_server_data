@@ -136,11 +136,12 @@ def result(filename, randseed):
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
-    with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/result.txt") as f:
-        strs = f.readlines()
     
+    with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/result.txt", "r") as f:
+        strs = f.readlines()
     strs = "\n".join(strs)
     file_url = "/home/site/wwwroot/uploader/" + remote_ip + randseed + "/" + filename
+
     return render_template("result.html", file_url=file_url, sentence=strs)
 
 @app.route('/reflect')
