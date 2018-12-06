@@ -124,7 +124,7 @@ def upload_file():
     return render_template("welcome.html")
 
 @app.route('/result/<filename>/<randseed>', methods=['GET', 'POST'])
-def result(filename, randseed, strs):
+def result(filename, randseed):
     remote_ip = request.remote_addr
     if request.method == "POST":
         file = request.files['file']
