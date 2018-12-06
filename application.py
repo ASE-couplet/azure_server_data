@@ -7,17 +7,13 @@ from flask_socketio import SocketIO, emit
 from werkzeug import secure_filename
 import logging
 import random
-import PIL
-import time
-from PIL import ImageFont
-from PIL import Image
-from PIL import ImageDraw
 from img2tag import img2tag
 import sys
+from flask import redirect
 # sys.path.append(os.path.join(sys.path[0], "predict_couplet"))
 sys.path.append(os.path.join(sys.path[0], "predict_poetry"))
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), "uploader")
@@ -29,53 +25,8 @@ socketio = SocketIO(app)
 # from web_test import Main_Poetry_maker
 # maker = Main_Poetry_maker()
 
-from web_test_poem import Main_Poetry_maker as Poetry_maker
-Poetry = Poetry_maker()
-
-def textImage(strs, sourceimage, color, savepath="./"):
-    
-    fp = open(sourceimage, "rb")
-    im = Image.open(fp)
-    out = im.resize((800, 600))
-    textout = Image.new("RGB", (800, 600), "white")
-    draw = ImageDraw.Draw(textout)
-    fontSize = 50
-    
-    x = 700
-    y = 20
-    
-    #设置字体，如果没有，也可以不设置
-    font = ImageFont.truetype(os.path.join(os.getcwd(), "/static/fonts/STXINGKA.TTF"), fontSize)
-    
-    right = 0       #往右位移量
-    down = 0        #往下位移量
-    w = 500         #文字宽度（默认值）
-    h = 500         #文字高度（默认值）
-    row_hight = 0   #行高设置（文字行距）
-    word_dir = 0    #文字间距
-
-    for k,s2 in enumerate(strs):            
-        if k == 0:
-            w,h = font.getsize(s2)   #获取第一个文字的宽和高
-        if s2 == "," or s2 == "\n" :  #换行识别
-            right = right + w + row_hight
-            down = 0
-            continue
-        else :
-            down = down+h + word_dir          
-
-        draw.text((x-right, y+down),s2,(0,0,0),font=font) #设置位置坐标 文字 颜色 字体
-    
-    del draw
-    out = Image.blend(out, textout, 0.2)
-    filename = "out.jpg"
-    new_filename = os.path.join(savepath, filename)
-    out.save(new_filename)
-    im.close()
-    fp.close()
-    return filename
-    
-    
+# from web_test_poem import Main_Poetry_maker as Poetry_maker
+# Poetry = Poetry_maker()
     
 def img_compress(file_path):
     img = Image.open(file_path)
@@ -97,8 +48,10 @@ def allowed_file(filename):
 def AboutUs():
     return render_template("AboutUs.html")
 
-@app.route("/FeedBack")
+@app.route("/FeedBack", methods=['POST', 'GET'])
 def FeedBack():
+    if request.method == "POST":
+        return redirect('/index')
     return render_template("FeedBack.html")
     
 @app.route('/uploads/<filename>/<randseed>')
@@ -107,6 +60,19 @@ def uploaded_file(filename, randseed):
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'],remote_ip),
                                filename)
 
+
+@app.route('/jueju_submit/<filename>/<randseed>', methods=['GET', 'POST'])
+def jueju_submit(filename, randseed):
+    if request.method == 'POST':
+        strs = request.form.get("jueju_display")
+        return strs + filename + randseed
+
+
+@app.route('/duilian_submit/<filename>/<randseed>', methods=['GET', 'POST'])
+def duilian_submit(filename, randseed):
+    if request.method == 'POST':
+        strs = request.form.get("duilian_display")
+        return strs + filename + randseed
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload_file():
@@ -143,15 +109,12 @@ def result(filename, randseed):
     strs = "\n".join(strs)
     file_url = "https://poempicture.azurewebsites.net/uploads/" + filename + "/" + randseed
 
-    return render_template("result.html", file_url=file_url, sentence=strs)
-
-@app.route('/reflect')
-def reflect():
-    return render_template("reflect.html")
+    return render_template("result.html", file_url=file_url, sentence=strs, filename=filename)
 
 @app.route('/test')
 def test():
-    return render_template("uploader.html")
+    return render_template("uploader.html", filename="daf", randseed="12312")
+
 
 @socketio.on('image_url')
 def process_msg(msg):
