@@ -25,17 +25,13 @@
         });
 
         socket.on('response', function(msg) {
-            window.location.href = 'result/' + msg.data + '/' + msg.randseed;
+            window.location.href = '/result/' + msg.data + '/' + msg.randseed;
         });
 
 		socket.on('wait', function(msg) {
 			socket.emit('inquiry', {'data': msg.data, 'randseed': msg.randseed});
-		});
+        });
 
-        // $('form#emit').submit(function(event) {
-        //         socket.emit('client_event', {data: $('#emit_data').val()});
-        //         return false;
-        //     });
     });
 </script>
 
@@ -74,7 +70,7 @@
 			});
 	
 			socket.on('response', function(msg) {
-				window.location.href = 'result/' + msg.data + '/' + msg.randseed;
+				window.location.href = '/result/' + msg.data + '/' + msg.randseed;
 			});
 	
 			socket.on('wait', function(msg) {
@@ -91,21 +87,18 @@
 
 <body style="background-color:whitesmoke">
     <div>
-        <img src="/static/images/upper.jpg">
-        <br/>
-        <font size="8" color="gray" face='logo_zh'>诗景|PoemSpace</font>
+        <font size="8" color="gray" face='logo_zh'>正在为您作诗</font>
         <br/>
         <br/>
         <font size="5" color="gray">
-            床前明月光，<br/>
-            疑似地上霜。<br/>
-            举头望明月，<br/>
-            低头思故乡。<br/>
+            哎呀不会写<br/>
+            写啥呢？<br/>
+            速度速度<br/>
+            真香<br/>
         </font>
+        <img src="/static/images/waiting.gif">
+        <br/>
         <br/>     
-    </div>
-    <div>
-        <p> Please wait </p>
     </div>
     <div>
         <br/>

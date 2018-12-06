@@ -135,6 +135,7 @@ def result(filename, randseed):
             remote_ip = remote_ip + randseed
             os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
+            filename=img_compress(os.path.join(app.config['UPLOAD_FOLDER'], remote_ip, filename))
             return render_template("uploader.html", filename=filename, randseed=randseed)
     
     with open("/home/site/wwwroot/uploader/" + remote_ip + randseed + "/strs.txt", "r") as f:
@@ -150,7 +151,7 @@ def reflect():
 
 @app.route('/test')
 def test():
-    return render_template("result.html")
+    return render_template("uploader.html")
 
 @socketio.on('image_url')
 def process_msg(msg):
