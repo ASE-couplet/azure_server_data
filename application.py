@@ -14,6 +14,8 @@ from flask import redirect
 sys.path.append(os.path.join(sys.path[0], "predict_poetry"))
 import PIL
 from PIL import Image
+from stitchimages import stitchimages_v1
+import time
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -27,8 +29,8 @@ socketio = SocketIO(app)
 # from web_test import Main_Poetry_maker
 # maker = Main_Poetry_maker()
 
-from web_test_poem import Main_Poetry_maker as Poetry_maker
-Poetry = Poetry_maker()
+# from web_test_poem import Main_Poetry_maker as Poetry_maker
+# Poetry = Poetry_maker()
     
 def img_compress(file_path):
     img = Image.open(file_path)
@@ -66,8 +68,16 @@ def uploaded_file(filename, randseed):
 @app.route('/jueju_submit/<filename>/<randseed>', methods=['GET', 'POST'])
 def jueju_submit(filename, randseed):
     if request.method == 'POST':
-        strs = request.form.get("jueju_display")
-        return strs + filename + randseed
+        remote_ip = request.remote_addr + randseed
+        poetry = request.form.get("jueju_display")
+        image_path = "/home/site/wwwroot/uploader/" + remote_ip + '/' + filename
+        QRcode_path = "/home/site/wwwroot/static/image/QRcode.png"
+        font_path = "/home/site/wwwroot/static/fonts/logo_zh.ttf"
+        output_path = "/home/site/wwwroot/uploader/" + remote_ip + '/final.jpg'
+        copyright = '来自 PoemScape\n'
+        copyright_font_path = '/home/site/wwwroot/static/fonts/logo_zh.ttf'
+        stitchimages_v1(image_path, poetry, QRcode_path, font_path, copyright, copyright_font_path, output_path)
+        return redirect(url_for('uploads', filename="final.jpg", randseed=randseed))
 
 
 @app.route('/duilian_submit/<filename>/<randseed>', methods=['GET', 'POST'])
@@ -146,6 +156,7 @@ def inquiry_for_result(msg):
         # filename = textImage(strs, filename, (0, 0, 0), os.path.join(app.config['UPLOAD_FOLDER'], remote_ip + msg['randseed']))
         emit('response', {'data': msg['data'], 'randseed': msg['randseed']})
     else:
+        time.sleep(1)
         emit('wait', {'data': msg['data'], 'randseed': msg['randseed'], 'status':False})
 
 if __name__ == '__main__':
