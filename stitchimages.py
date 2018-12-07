@@ -112,7 +112,7 @@ def resize_image(img, size=(100, 100)):
         if img.mode not in ('L', 'RGB'):
             img = img.convert('RGB')
         img = img.resize(size)
-    except Exception, e:
+    except Exception(e):
         pass
     return img
 
