@@ -121,7 +121,7 @@ def result(filename, randseed):
     strs = "\n".join(strs)
     file_url = "https://poempicture.azurewebsites.net/uploads/" + filename + "/" + randseed
 
-    return render_template("result.html", file_url=file_url, sentence=strs, filename=filename)
+    return render_template("result.html", file_url=file_url, sentence=strs, filename=filename, randseed=randseed)
 
 @app.route('/test')
 def test():
