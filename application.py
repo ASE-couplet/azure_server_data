@@ -59,7 +59,7 @@ def FeedBack():
     return render_template("FeedBack.html")
     
 @app.route('/uploads/<filename>/<randseed>')
-def uploaded_file(filename, randseed):
+def uploads(filename, randseed):
     remote_ip = request.remote_addr + randseed
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'],remote_ip),
                                filename)
