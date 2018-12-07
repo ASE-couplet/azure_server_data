@@ -96,7 +96,7 @@ def copyright2image(copyright, font_path=None):
     else:
         font = None
 
-    draw.multiline_text(xy=(font_size * 0.1, 0), text=unicode(copyright, 'UTF-8'), fill=(192, 192, 192), font=font,
+    draw.multiline_text(xy=(font_size * 0.1, 0), text=copyright, fill=(192, 192, 192), font=font,
                         align='left')
     del draw
     return image
