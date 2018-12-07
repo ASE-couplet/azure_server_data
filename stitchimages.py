@@ -57,7 +57,7 @@ def poetry2image(poetry, font_path=None):
     :return:
     """
     font_size = 10
-    sentences = poetry.split('\n')
+    sentences = poetry.split()
     num_lines = len(sentences)
 
     total_h = (font_size) * (num_lines + 2)
@@ -72,7 +72,7 @@ def poetry2image(poetry, font_path=None):
     else:
         font = None
 
-    draw.multiline_text(xy=(font_size * 0.1, font_size*0.5), text=unicode(poetry, 'UTF-8'), fill=(0, 0, 0), font=font,
+    draw.multiline_text(xy=(font_size * 0.1, font_size*0.5), text=poetry, fill=(0, 0, 0), font=font,
                         spacing=font_size * 0.2, align='left')
     del draw
     return image, font_size
