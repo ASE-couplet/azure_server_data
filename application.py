@@ -72,7 +72,7 @@ def jueju_submit(filename, randseed):
         poetry = request.form.get("jueju_display")
         image_path = "/home/site/wwwroot/uploader/" + remote_ip + '/' + filename
         QRcode_path = "/home/site/wwwroot/static/image/QRcode.png"
-        font_path = "/home/site/wwwroot/static/fonts/logo_zh.ttf"
+        font_path = "/home/site/wwwroot/static/fonts/STXINGKA.TTF"
         output_path = "/home/site/wwwroot/uploader/" + remote_ip + '/final.jpg'
         copyright = '来自 PoemScape\n'
         copyright_font_path = '/home/site/wwwroot/static/fonts/logo_zh.ttf'
@@ -83,8 +83,16 @@ def jueju_submit(filename, randseed):
 @app.route('/duilian_submit/<filename>/<randseed>', methods=['GET', 'POST'])
 def duilian_submit(filename, randseed):
     if request.method == 'POST':
-        strs = request.form.get("duilian_display")
-        return strs + filename + randseed
+        remote_ip = request.remote_addr + randseed
+        poetry = request.form.get("duilian_display")
+        image_path = "/home/site/wwwroot/uploader/" + remote_ip + '/' + filename
+        QRcode_path = "/home/site/wwwroot/static/image/QRcode.png"
+        font_path = "/home/site/wwwroot/static/fonts/STXINGKA.TTF"
+        output_path = "/home/site/wwwroot/uploader/" + remote_ip + '/final.jpg'
+        copyright = '来自 PoemScape\n'
+        copyright_font_path = '/home/site/wwwroot/static/fonts/logo_zh.ttf'
+        stitchimages_v1(image_path, poetry, QRcode_path, font_path, copyright, copyright_font_path, output_path)
+        return redirect(url_for('uploads', filename="final.jpg", randseed=randseed))
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload_file():

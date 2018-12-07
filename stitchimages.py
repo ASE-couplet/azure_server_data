@@ -56,7 +56,7 @@ def poetry2image(poetry, font_path=None):
     :param font_path:
     :return:
     """
-    font_size = 10
+    font_size = 5
     sentences = poetry.split()
     num_lines = len(sentences)
 
